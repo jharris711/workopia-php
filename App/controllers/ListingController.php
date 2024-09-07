@@ -60,7 +60,19 @@ class ListingController {
      * @return void
      */
     public function store() {
-        $allowedFields = ["title", "description", "salary", "requirements", "benefits", "company", "address", "city", "state", "phone", "email"];
+        $allowedFields = [
+            "title",
+            "description",
+            "salary",
+            "requirements",
+            "benefits",
+            "company",
+            "address",
+            "city",
+            "state",
+            "phone",
+            "email"
+        ];
 
         $newListingData = array_intersect_key($_POST, array_flip($allowedFields));
 
@@ -68,6 +80,31 @@ class ListingController {
 
         $newListingData = array_map('sanitize', $newListingData);
 
-        inspectAndDie($newListingData);
+        $requiredFields = [
+            'title',
+            'description',
+            'email',
+            'city',
+            'state',
+        ];
+
+        $errors = [];
+
+        foreach ($requiredFields as $field) {
+            if (empty($newListingData[$field]) || !Validation::string($newListingData[$field])) {
+                $errors[$field] = ucfirst($field) . ' is required';
+            }
+        }
+
+        if (!empty($errors)) {
+            //reload view with errors
+            loadView(('listings/create'), [
+                'errors' => $errors,
+                'listing' => $newListingData
+            ]);
+        } else {
+            // SUbmit data
+            echo 'Success';
+        }
     }
 }
