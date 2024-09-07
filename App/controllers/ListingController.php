@@ -291,6 +291,8 @@ class ListingController {
 
             $this->db->query($query, $updateValues);
 
+            $_SESSION['success_message'] = 'Listing updated successfully';
+
             redirect('/listings');
         }
     }
