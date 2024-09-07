@@ -293,7 +293,7 @@ class ListingController {
 
             $_SESSION['success_message'] = 'Listing updated successfully';
 
-            redirect('/listings');
+            redirect('/listings/' . $id);
         }
     }
 }
