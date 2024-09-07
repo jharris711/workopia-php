@@ -173,6 +173,9 @@ class ListingController {
             $params
         );
 
+        // Set the flash message
+        $_SESSION['success_message'] = 'Listing deleted successfully';
+
         redirect('/listings');
     }
 }
