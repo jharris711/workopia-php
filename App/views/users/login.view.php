@@ -7,7 +7,7 @@
         <?= loadPartial('errors', [
             'errors' => $errors ?? []
         ]); ?>
-        <form>
+        <form method="post" action="/auth/login">
             <div class="mb-4">
                 <input
                     type="email"
