@@ -12,6 +12,7 @@
                 <input
                     type="text"
                     name="name"
+                    value="<?= $user['name'] ?? '' ?>"
                     placeholder="Full Name"
                     class="w-full px-4 py-2 border rounded focus:outline-none" />
             </div>
@@ -19,6 +20,7 @@
                 <input
                     type="email"
                     name="email"
+                    value="<?= $user['email'] ?? '' ?>"
                     placeholder="Email Address"
                     class="w-full px-4 py-2 border rounded focus:outline-none" />
             </div>
@@ -26,6 +28,7 @@
                 <input
                     type="text"
                     name="city"
+                    value="<?= $user['city'] ?? '' ?>"
                     placeholder="City"
                     class="w-full px-4 py-2 border rounded focus:outline-none" />
             </div>
@@ -33,6 +36,7 @@
                 <input
                     type="text"
                     name="state"
+                    value="<?= $user['state'] ?? '' ?>"
                     placeholder="State"
                     class="w-full px-4 py-2 border rounded focus:outline-none" />
             </div>
