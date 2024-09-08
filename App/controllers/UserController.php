@@ -31,4 +31,54 @@ class UserController {
     public function create() {
         loadView('users/create');
     }
+
+
+    /**
+     * Store user in the db
+     * 
+     * @return void
+     */
+    public function store() {
+        $name = $_POST['name'];
+        $email = $_POST['email'];
+        $city = $_POST['city'];
+        $state = $_POST['state'];
+        $password = $_POST['password'];
+        $passwordConfirmation = $_POST['password_confirmation'];
+
+        $errors = [];
+
+        // Validate email
+        if (!Validation::email($email)) {
+            $errors['email'] = 'Invalid email address';
+        }
+
+        // Validate name
+        if (!Validation::string($name, 2, 50)) {
+            $errors['name'] = 'Name must be between 2 and 50 characters';
+        }
+
+        // Validate password
+        if (!Validation::string($password, 6, 50)) {
+            $errors['password'] = 'Password must be between 6 and 50 characters';
+        }
+
+        // Validate password confirmation
+        if (!Validation::match($password, $passwordConfirmation)) {
+            $errors['password_confirmation'] = 'Passwords do not match';
+        }
+
+        if (!empty($errors)) {
+            loadView('users/create', [
+                'errors' => $errors,
+                'user' => [
+                    'name' => $name,
+                    'email' => $email,
+                    'city' => $city,
+                    'state' => $state
+                ]
+            ]);
+            exit;
+        }
+    }
 }
