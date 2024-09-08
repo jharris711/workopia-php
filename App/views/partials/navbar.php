@@ -12,7 +12,7 @@ use Framework\Session;
             <?php if (Session::has('user')) : ?>
                 <div class="flex justify-between items-center gap-4">
                     <div>Welcome <?= Session::get('user')['name'] ?></div>
-                    <form>
+                    <form method="post" action="/auth/logout">
                         <button type="submit" class="text-white inline hove:underline">Logout</button>
                     </form>
                     <a
