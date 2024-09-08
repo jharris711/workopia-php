@@ -194,6 +194,8 @@ class ListingController {
      * @return void
      */
     public function edit($params) {
+
+
         $id = $params['id'] ?? '';
 
         $params = [
@@ -209,6 +211,12 @@ class ListingController {
         if (!$listing) {
             ErrorController::notFound('Listing not found');
             return;
+        }
+
+        // Authorization check
+        if (!Authorization::isOwner($listing->user_id)) {
+            Session::setFlash('error_message', 'You are not authorized to update this listing');
+            return redirect('/listings/' . $listing->id);
         }
 
         loadView('listings/edit', [
@@ -238,6 +246,12 @@ class ListingController {
         if (!$listing) {
             ErrorController::notFound('Listing not found');
             return;
+        }
+
+        // Authorization check
+        if (!Authorization::isOwner($listing->user_id)) {
+            Session::setFlash('error_message', 'You are not authorized to update this listing');
+            return redirect('/listings/' . $listing->id);
         }
 
         $allowedFields = [
